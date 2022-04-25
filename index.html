@@ -20,7 +20,7 @@
     <header class="z-20 w-full fixed">
         <div class="bg-gray-900 bg-opacity-90">
             <div class="container mx-auto py-4 relative flex flex-col items-center w-full justify-center">
-                <p class="text-gray-100 text-center text-xl2 ml-3 font-bold">AES (Advanced Encryption Standard)</p>
+                <p class="text-gray-100 text-center text-xl2 ml-3 font-bold">Laboratorio AES (Advanced Encryption Standard)</p>
             </div>
         </div>
     </header>
@@ -53,21 +53,50 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6 mb-3">
                                     <div class="col-span-6">
-                                        <label for="clave" class="block font-medium text-sm text-gray-700">Clave</label>
-                                        <input id="clave" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                                        <p class="text-sm text-red-600 text-left pl-1 errorClave hidden">message</p>
+                                    <fieldset x-data="{size: 128}">
+                                        <legend class="block font-medium text-sm text-gray-700">Tamaño de la clave</legend>
+                                        <div class="grid grid-cols-3 gap-3">
+                                            <label for="128cr" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                :aria-checked="size == '128'"
+                                                :class="size == '128' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                <input x-model="size" id="128cr" type="radio" name="sizeKey" value="128" checked class="sr-only"
+                                                    aria-labelledby="size-choice-0-label">
+                                                <p id="size-choice-0-label">128 bits</p>
+                                            </label>
+                                            <label for="192" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                :aria-checked="size == '192'"
+                                                :class="size == '192' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                <input x-model="size" id="192" type="radio" name="sizeKey" value="192" class="sr-only"
+                                                    aria-labelledby="size-choice-0-label">
+                                                <p id="size-choice-0-label">192 bits</p>
+                                            </label>
+                                            <label for="256"
+                                                class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                :aria-checked="size == '256'"
+                                                :class="size == '256' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                <input x-model="size" id="256" type="radio" name="sizeKey" value="256" class="sr-only" aria-labelledby="size-choice-0-label">
+                                                <p id="size-choice-0-label">256 bits</p>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorNBits hidden">Seleccione un tamaño de bits para la Clave</p>
                                     </div>
                                     <div class="col-span-6">
-                                        <label for="texto" class="block font-medium text-sm text-gray-700">Texto Plano</label>
-                                        <textarea id="texto" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto plano"></textarea>
-                                        <p class="text-sm text-red-600 text-left pl-1 errorTexto hidden">message</p>
+                                        <label for="claveCifrado" class="block font-medium text-sm text-gray-700">Clave</label>
+                                        <input id="claveCifrado" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                        <p class="text-sm text-red-600 text-left pl-1 errorPassword hidden">Ingrese una clave para cifrar el texto</p>
                                     </div>
-                                    <div class="col-span-6 bg-indigo-100 text-indigo-500 border-indigo-300 border-l-4 p-4 rounded-md shadow">
+                                    <div class="col-span-6">
+                                        <label for="textoPlano" class="block font-medium text-sm text-gray-700">Texto Plano</label>
+                                        <textarea id="textoPlano" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto plano"></textarea>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorPlaintxt hidden">Ingrese el texto a cifrar</p>
+                                    </div>
+                                    <div class="respuestaCripto hidden col-span-6 bg-indigo-100 text-indigo-500 border-indigo-300 border-l-4 p-4 rounded-md shadow">
                                         <p class="font-medium"><strong>Texto Cifrado</strong></p>
-                                        <p id="encriptado">Aquí estara el texto encriptado</p>
+                                        <p id="textoCifradoPlano">Aquí estara el texto encriptado</p>
                                         <div class="action-buttons flex items-end  justify-between">
-                                            <p class="text-left text-xs"><strong>Tiempo: </strong><span>2.000</span>ms</p>
-                                            <button onclick="copyToClipBoard()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition disabled:opacity-50 ml-3"">
+                                            <p class="text-left text-xs"><strong>Tiempo: </strong><span id="tiempoCifrado">2.000</span></p>
+                                            <button onclick="copyToClipBoard()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">
                                                 Copiar
                                                 <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -79,19 +108,25 @@
                             </div>
 
                             <div class="action-buttons flex items-center justify-end px-4 py-3 bg-gray-200 text-right sm:px-6 sm:rounded-b-md">
-                                <span class="mr-3 loader">
+                                <span class="mr-3 loaderCripto hidden">
                                     <svg class="animate-spin h-6 w-6 text-green-500 opacity-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </span>
-                                <button class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+                                <button class="cleanCriptoBtn inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
                                     Limpiar
                                     <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </button>
-                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition disabled:opacity-50 ml-3"">
+                                <button class="resetCriptoBtn hidden inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">
+                                    Resetear
+                                    <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                </button>
+                                <button class="criptoBtn inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">
                                     Encriptar
                                     <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -102,8 +137,12 @@
                     </div>
                 </div>
 
+                <div class="py-5">
+                    <div class="border-t border-gray-200"></div>
+                </div>
+
                 <!-- Desencriptar -->
-                <div class="mt-12">
+                <div class="mt-8">
                     <div class="md:grid md:grid-cols-12 md:gap-6 mb-8">
                         <div class="mt-5 md:mt-0 md:col-start-2 md:col-span-10 md:rounded-md shadow">
                             <div class="flex items-center px-4 sm:px-6 pt-4 pb-3 bg-gray-800 border-b border-bluegray-200 sm:rounded-t-md">
@@ -122,18 +161,18 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6 mb-3">
                                     <div class="col-span-6">
-                                        <label for="clave" class="block font-medium text-sm text-gray-700">Clave</label>
-                                        <input id="clave" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                        <label for="claveDecifrado" class="block font-medium text-sm text-gray-700">Clave</label>
+                                        <input id="claveDecifrado" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                         <p class="text-sm text-red-600 text-left pl-1 errorClave hidden">message</p>
                                     </div>
                                     <div class="col-span-6">
-                                        <label for="texto" class="block font-medium text-sm text-gray-700">Texto Cifrado</label>
-                                        <textarea id="texto" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto cifrado"></textarea>
+                                        <label for="textoCifrado" class="block font-medium text-sm text-gray-700">Texto Cifrado</label>
+                                        <textarea id="textoCifrado" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto cifrado"></textarea>
                                         <p class="text-sm text-red-600 text-left pl-1 errorTexto hidden">message</p>
                                     </div>
                                     <div class="col-span-6 bg-green-100 text-green-500 border-green-300 border-l-4 p-4 rounded-md shadow">
                                         <p class="font-medium"><strong>Texto Descifrado</strong></p>
-                                        <p id="encriptado">Aquí estara el texto decifrado</p>
+                                        <p id="textoDecifrado">Aquí estara el texto decifrado</p>
                                         <p class="text-left text-xs mt-2"><strong>Tiempo: </strong><span>2.000</span>ms</p>
                                     </div>
                                 </div>
@@ -151,7 +190,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </button>
-                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition disabled:opacity-50 ml-3"">
+                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">
                                     Desencriptar
                                     <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
@@ -165,23 +204,35 @@
             </div>
         </div>
     </main>
-    <footer class="bg-gray-800 pt-16 w-full" style="background-size: auto 150px; background-position: 95% center;">
+    <footer class="bg-gray-800 pt-4 w-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-12 gap-y-5 py-6 items-center">
                 <div class="col-span-12 text-white">
                     <ul class="mb-3 text-center">
-                        <li><p class="grey-text text-lighten-3 mb-3">Seguridad de la Información</p></li>
-                        <li><p class="grey-text text-lighten-3">Julio Cesar Calderón García</p></li>
+                        <li><p class="grey-text text-lighten-3  font-bold">Seguridad de la Información</p></li>
+                        <li><p class="grey-text text-lighten-3">Ing. Jose Luis Cabra López</p></li>
+                        <li><p class="grey-text text-lighten-3 mt-3">Julio Cesar Calderón García</p></li>
                         <li><p class="grey-text text-lighten-3">Zharick Lisbeth Alba Moreno</p></li>
-                        <li class="flex justify-center my-2">
+                        <li class="flex justify-center my-2 gap-3">
+                            <a class="grey-text text-lighten-3 hover:text-lime-500" href="public/pdf/Algoritmo-AES.pdf" target="_blank" title="Video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-pdf-fill" viewBox="0 0 16 16">
+                                    <path d="M5.523 12.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.148 21.148 0 0 0 .5-1.05 12.045 12.045 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.881 3.881 0 0 1-.435-.41c.228.005.434.022.612.054.317.057.466.147.518.209a.095.095 0 0 1 .026.064.436.436 0 0 1-.06.2.307.307 0 0 1-.094.124.107.107 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256zM8.278 6.97c-.04.244-.108.524-.2.829a4.86 4.86 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.517.517 0 0 1 .145-.04c.013.03.028.092.032.198.005.122-.007.277-.038.465z" />
+                                    <path fill-rule="evenodd" d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.651 11.651 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.856.856 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.844.844 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.76 5.76 0 0 0-1.335-.05 10.954 10.954 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.238 1.238 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a19.697 19.697 0 0 1-1.062 2.227 7.662 7.662 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103z" />
+                                </svg>
+                            </a>
+
+                            <a class="grey-text text-lighten-3 hover:text-lime-500" href="https://qrd.by/laboratorio-aes" target="_blank" title="Presentación">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
+                                </svg>
+                            </a>
                             <a class="grey-text text-lighten-3 hover:text-lime-500" href="https://github.com/juliansfreelance/Algoritmo-AES" target="_blank" title="GitHub">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-github"
-                                    viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
                                 </svg>
                             </a>
                         </li>
+
                     </ul>
                 </div>
                 <div class="col-span-12">
@@ -196,19 +247,11 @@
         </div>
     </footer>
 </div>
-<script>
-    function copyToClipBoard() {
+<script src="//unpkg.com/alpinejs" defer></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="public/js/script.js"></script>
+<script type="module" src="public/js/app.js"></script>
 
-            var content = document.getElementById('encriptado').innerHTML;
-             navigator.clipboard.writeText(content)
-            .then(() => {
-                alert("Text copied to clipboard...")
-            })
-            .catch(err => {
-                alert('Something went wrong', err);
-            })
-        }
-</script>
 </body>
 
 </html>
