@@ -7,12 +7,208 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <meta name='author' href="https://github.com/juliansfreelance" email="juliansfreelance@gmail.com" content='Julio Cesar Calderón Garcia - Desarrollador y Diseñador Web'>
+    <meta name='author' href="https://github.com/juliansfreelance" email="juliansfreelance@gmail.com" content='Julio Cesar Calderón García - Desarrollador y Diseñador Web'>
     <meta name="description" content="Demostración AES (Advanced Encryption Standard) - Seguridad de la información">
 
-    <link rel="stylesheet" href="/public/css/tailwind.css">
+    <link rel="stylesheet" href="public/css/tailwind.css">
+
     <title>AES Demostración</title>
 </head>
-<body>
+
+<body class="antialiased h-full w-full bg-gray-100">
+<div class="flex flex-col min-h-screen">
+    <header class="z-20 w-full fixed">
+        <div class="bg-gray-900 bg-opacity-90">
+            <div class="container mx-auto py-4 relative flex flex-col items-center w-full justify-center">
+                <p class="text-gray-100 text-center text-xl2 ml-3 font-bold">AES (Advanced Encryption Standard)</p>
+            </div>
+        </div>
+    </header>
+    <main class="flex-grow z-0">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="relative pt-16">
+                <h3 class="font-bold text-2xl text-center text-gray-700 mt-8 mb-4 uppercase">demostración funcional</h3>
+                <p class="px-6 leading-tight text-gray-800 text-justify">
+                    Desarrollamos esta implementación del algoritmo <strong>AES en JavaScript</strong> para ilustrar el estándar <strong>AES original (NIST FIPS-197)</strong> lo más fielmente posible. Está pensado como una introducción para aquellos que buscan aprender algo sobre la implementación del cifrado AES. El énfasis está en la transparencia y la fidelidad al estándar más que en la eficiencia.
+                </p>
+                <!-- Encriptar -->
+                <div class="mt-12">
+                    <div class="md:grid md:grid-cols-12 md:gap-6 mb-8">
+                        <div class="mt-5 md:mt-0 md:col-start-2 md:col-span-10 md:rounded-md shadow">
+
+                            <div class="flex items-center px-4 sm:px-6 pt-4 pb-3 bg-gray-800 border-b border-bluegray-200 sm:rounded-t-md">
+                                <div class="hidden sm:block">
+                                    <div class="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-gray-400 text-2xl font-mono">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="leading-tight text-green-500 ml-3 text-left">
+                                    <h2 class="text-xl font-bold">Cifrar Texto</h2>
+                                    <p class="text-sm text-gray-300 font-normal leading-tight">Ingresa la clave y el texto a encriptar.</p>
+                                </div>
+                            </div>
+
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <div class="grid grid-cols-6 gap-6 mb-3">
+                                    <div class="col-span-6">
+                                        <label for="clave" class="block font-medium text-sm text-gray-700">Clave</label>
+                                        <input id="clave" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                        <p class="text-sm text-red-600 text-left pl-1 errorClave hidden">message</p>
+                                    </div>
+                                    <div class="col-span-6">
+                                        <label for="texto" class="block font-medium text-sm text-gray-700">Texto Plano</label>
+                                        <textarea id="texto" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto plano"></textarea>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorTexto hidden">message</p>
+                                    </div>
+                                    <div class="col-span-6 bg-indigo-100 text-indigo-500 border-indigo-300 border-l-4 p-4 rounded-md shadow">
+                                        <p class="font-medium"><strong>Texto Cifrado</strong></p>
+                                        <p id="encriptado">Aquí estara el texto encriptado</p>
+                                        <div class="action-buttons flex items-end  justify-between">
+                                            <p class="text-left text-xs"><strong>Tiempo: </strong><span>2.000</span>ms</p>
+                                            <button onclick="copyToClipBoard()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition disabled:opacity-50 ml-3"">
+                                                Copiar
+                                                <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons flex items-center justify-end px-4 py-3 bg-gray-200 text-right sm:px-6 sm:rounded-b-md">
+                                <span class="mr-3 loader">
+                                    <svg class="animate-spin h-6 w-6 text-green-500 opacity-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </span>
+                                <button class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+                                    Limpiar
+                                    <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition disabled:opacity-50 ml-3"">
+                                    Encriptar
+                                    <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desencriptar -->
+                <div class="mt-12">
+                    <div class="md:grid md:grid-cols-12 md:gap-6 mb-8">
+                        <div class="mt-5 md:mt-0 md:col-start-2 md:col-span-10 md:rounded-md shadow">
+                            <div class="flex items-center px-4 sm:px-6 pt-4 pb-3 bg-gray-800 border-b border-bluegray-200 sm:rounded-t-md">
+                                <div class="hidden sm:block">
+                                    <div class="h-14 w-14 bg-gray-900 rounded-full flex flex-shrink-0 justify-center items-center text-gray-400 text-2xl font-mono">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="leading-tight text-green-500 ml-3 text-left">
+                                    <h2 class="text-xl font-bold">Descifrar Texto</h2>
+                                    <p class="text-sm text-gray-300 font-normal leading-tight">Ingresa la clave y el texto cifrado.</p>
+                                </div>
+                            </div>
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <div class="grid grid-cols-6 gap-6 mb-3">
+                                    <div class="col-span-6">
+                                        <label for="clave" class="block font-medium text-sm text-gray-700">Clave</label>
+                                        <input id="clave" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                        <p class="text-sm text-red-600 text-left pl-1 errorClave hidden">message</p>
+                                    </div>
+                                    <div class="col-span-6">
+                                        <label for="texto" class="block font-medium text-sm text-gray-700">Texto Cifrado</label>
+                                        <textarea id="texto" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto cifrado"></textarea>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorTexto hidden">message</p>
+                                    </div>
+                                    <div class="col-span-6 bg-green-100 text-green-500 border-green-300 border-l-4 p-4 rounded-md shadow">
+                                        <p class="font-medium"><strong>Texto Descifrado</strong></p>
+                                        <p id="encriptado">Aquí estara el texto decifrado</p>
+                                        <p class="text-left text-xs mt-2"><strong>Tiempo: </strong><span>2.000</span>ms</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="action-buttons flex items-center justify-end px-4 py-3 bg-gray-200 text-right sm:px-6 sm:rounded-b-md">
+                                <span class="mr-3 loader">
+                                    <svg class="animate-spin h-6 w-6 text-green-500 opacity-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"> </circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </span>
+                                <button class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+                                    Limpiar
+                                    <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition disabled:opacity-50 ml-3"">
+                                    Desencriptar
+                                    <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer class="bg-gray-800 pt-16 w-full" style="background-size: auto 150px; background-position: 95% center;">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="grid grid-cols-12 gap-y-5 py-6 items-center">
+                <div class="col-span-12 text-white">
+                    <ul class="mb-3 text-center">
+                        <li><p class="grey-text text-lighten-3 mb-3">Seguridad de la Información</p></li>
+                        <li><p class="grey-text text-lighten-3">Julio Cesar Calderón García</p></li>
+                        <li><p class="grey-text text-lighten-3">Zharick Lisbeth Alba Moreno</p></li>
+                        <li class="flex justify-center my-2">
+                            <a class="grey-text text-lighten-3 hover:text-lime-500" href="https://github.com/juliansfreelance/Algoritmo-AES" target="_blank" title="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-github"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-span-12">
+                    <p class="text-gray-500 text-center text-xs px-5">Tenga en cuenta que estos scripts están destinados a ayudar en el estudio del algoritmo AES, no para su uso en producción.</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-900">
+            <div class="container mx-auto py-4 relative md:flex flex-row items-center w-full justify-center z-0">
+                <p class="font-normal text-white opacity-50 text-center text-xs ml-3">© 2022 Ucompensa Facultad de Ingeniería.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+    function copyToClipBoard() {
+
+            var content = document.getElementById('encriptado').innerHTML;
+             navigator.clipboard.writeText(content)
+            .then(() => {
+                alert("Text copied to clipboard...")
+            })
+            .catch(err => {
+                alert('Something went wrong', err);
+            })
+        }
+</script>
 </body>
+
 </html>
