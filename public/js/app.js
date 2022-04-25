@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
         const password = document.querySelector('#claveDecifrado').value;
         const plaintxt = document.querySelector('#textoCifrado').value;
 
-        if (password == '') { errorPassword.classList.remove('hidden'); }
-        if (plaintxt == '') { errorPlaintxt.classList.remove('hidden'); }
+        if (password == '') { errorPasswordDC.classList.remove('hidden'); }
+        if (plaintxt == '') { errorPlaintxtDC.classList.remove('hidden'); }
         if (nBits == '' || password == '' || plaintxt == '') {
             decifrarBtn.disabled = false;
             loaderDescripto.classList.add('hidden');
@@ -176,16 +176,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 const t2 = performance.now();
                 document.querySelector('#textoDecifrado').innerHTML = decrtext;
                 document.querySelector('#tiempoDecifrado').innerHTML = (t2 - t1).toFixed(3) + 'ms';
-                decifrarBtn.classList.add('hidden');
                 respuestaDescripto.classList.remove('hidden');
+                //decifrarBtn.classList.add('hidden');
                 //resetCriptoBtn.classList.remove('hidden');
-                decifrarBtn.disabled = false;
             } catch (e) {
                 const t2 = performance.now();
                 respuestaDescripto.classList.add('hidden');
                 document.querySelector('#textoDecifrado').value = '';
                 document.querySelector('#error-tiempoDecifrado').innerHTML = (t2 - t1).toFixed(3) + 'ms';
-                document.querySelector('#error-decrypt').innerHTML = 'La cadena a descodificar no está correctamente codificada<br>'+e.message;
+                document.querySelector('#error-decrypt').innerHTML = 'La cadena a descodificar no está correctamente codificada<br><span class="text-xs">'+e.message+'</span>';
                 erroraDescripto.classList.remove('hidden');
             }
             loaderDescripto.classList.add('hidden');
