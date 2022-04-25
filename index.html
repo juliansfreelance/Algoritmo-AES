@@ -56,10 +56,10 @@
                                     <fieldset x-data="{size: 128}">
                                         <legend class="block font-medium text-sm text-gray-700">Tamaño de la clave</legend>
                                         <div class="grid grid-cols-3 gap-3">
-                                            <label for="128cr" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                            <label for="128" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
                                                 :aria-checked="size == '128'"
                                                 :class="size == '128' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
-                                                <input x-model="size" id="128cr" type="radio" name="sizeKey" value="128" checked class="sr-only"
+                                                <input x-model="size" id="128" type="radio" name="sizeKey" value="128" checked class="sr-only"
                                                     aria-labelledby="size-choice-0-label">
                                                 <p id="size-choice-0-label">128 bits</p>
                                             </label>
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="respuestaCripto hidden col-span-6 bg-indigo-100 text-indigo-500 border-indigo-300 border-l-4 p-4 rounded-md shadow">
                                         <p class="font-medium"><strong>Texto Cifrado</strong></p>
-                                        <p id="textoCifradoPlano">Aquí estara el texto encriptado</p>
+                                        <p id="textoCifradoPlano" class="truncate">Aquí estara el texto encriptado</p>
                                         <div class="action-buttons flex items-end  justify-between">
                                             <p class="text-left text-xs"><strong>Tiempo: </strong><span id="tiempoCifrado">2.000</span></p>
                                             <button onclick="copyToClipBoard()" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">

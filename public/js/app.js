@@ -18,9 +18,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
         loaderCripto.classList.remove('hidden');
         document.querySelector('#claveCifrado').value = "";
         document.querySelector('#textoPlano').value = "";
-        document.querySelector('#128cr').checked = true;
-        cleanCriptoBtn.disabled = false;
+        // document.querySelector('#128cr').checked = true;
         loaderCripto.classList.add('hidden');
+        resetCriptoBtn.classList.add('hidden');
+        respuestaCripto.classList.add('hidden');
+        document.querySelector('#textoCifradoPlano').innerHTML = '';
+        criptoBtn.disabled = false;
+        criptoBtn.classList.remove('hidden');
+        cleanCriptoBtn.disabled = false;
     });
     criptoBtn.addEventListener('click', () => {
         criptoBtn.disabled = true;
