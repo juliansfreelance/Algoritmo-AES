@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 respuestaDescripto.classList.add('hidden');
                 document.querySelector('#textoDecifrado').value = '';
                 document.querySelector('#error-tiempoDecifrado').innerHTML = (t2 - t1).toFixed(3) + 'ms';
-                document.querySelector('#error-decrypt').innerHTML = 'La cadena a descodificar no está correctamente codificada<br><span class="text-xs">'+e.message+'</span>';
+                document.querySelector('#error-decrypt').innerHTML = 'Al parecer, los datos ingresados no son correctos.<br><span class="text-xs font-bold">Error:</span> <span class="text-xs">'+e.message+'</span>';
                 erroraDescripto.classList.remove('hidden');
             }
             loaderDescripto.classList.add('hidden');
