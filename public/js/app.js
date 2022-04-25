@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
         loaderCripto.classList.remove('hidden');
         document.querySelector('#claveCifrado').value = "";
         document.querySelector('#textoPlano').value = "";
+        errorNBits.classList.add('hidden');
+        errorPassword.classList.add('hidden');
+        errorPlaintxt.classList.add('hidden');
         loaderCripto.classList.add('hidden');
         resetCriptoBtn.classList.add('hidden');
         respuestaCripto.classList.add('hidden');
@@ -143,6 +146,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
         document.querySelector('#textoCifrado').value = "";
         loaderDescripto.classList.add('hidden');
         respuestaDescripto.classList.add('hidden');
+        errorNBitsDC.classList.add('hidden');
+        errorPasswordDC.classList.add('hidden');
+        errorPlaintxtDC.classList.add('hidden');
         document.querySelector('#textoDecifrado').innerHTML = '';
         decifrarBtn.disabled = false;
         decifrarBtn.classList.remove('hidden');
