@@ -53,32 +53,32 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6 mb-3">
                                     <div class="col-span-6">
-                                    <fieldset x-data="{size: 128}">
-                                        <legend class="block font-medium text-sm text-gray-700">Tamaño de la clave</legend>
-                                        <div class="grid grid-cols-3 gap-3">
-                                            <label for="128" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
-                                                :aria-checked="size == '128'"
-                                                :class="size == '128' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
-                                                <input x-model="size" id="128" type="radio" name="sizeKey" value="128" checked class="sr-only"
-                                                    aria-labelledby="size-choice-0-label">
-                                                <p id="size-choice-0-label">128 bits</p>
-                                            </label>
-                                            <label for="192" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
-                                                :aria-checked="size == '192'"
-                                                :class="size == '192' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
-                                                <input x-model="size" id="192" type="radio" name="sizeKey" value="192" class="sr-only"
-                                                    aria-labelledby="size-choice-0-label">
-                                                <p id="size-choice-0-label">192 bits</p>
-                                            </label>
-                                            <label for="256"
-                                                class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
-                                                :aria-checked="size == '256'"
-                                                :class="size == '256' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
-                                                <input x-model="size" id="256" type="radio" name="sizeKey" value="256" class="sr-only" aria-labelledby="size-choice-0-label">
-                                                <p id="size-choice-0-label">256 bits</p>
-                                            </label>
-                                        </div>
-                                    </fieldset>
+                                        <fieldset x-data="{size: 128}">
+                                            <legend class="block font-medium text-sm text-gray-700">Tamaño de la clave</legend>
+                                            <div class="grid grid-cols-3 gap-3">
+                                                <label for="128" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                    :aria-checked="size == '128'"
+                                                    :class="size == '128' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                    <input x-model="size" id="128" type="radio" name="sizeKeyCifrar" value="128" checked class="sr-only"
+                                                        aria-labelledby="size-choice-0-label">
+                                                    <p id="size-choice-0-label">128 bits</p>
+                                                </label>
+                                                <label for="192" class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                    :aria-checked="size == '192'"
+                                                    :class="size == '192' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                    <input x-model="size" id="192" type="radio" name="sizeKeyCifrar" value="192" class="sr-only"
+                                                        aria-labelledby="size-choice-0-label">
+                                                    <p id="size-choice-0-label">192 bits</p>
+                                                </label>
+                                                <label for="256"
+                                                    class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                    :aria-checked="size == '256'"
+                                                    :class="size == '256' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                    <input x-model="size" id="256" type="radio" name="sizeKeyCifrar" value="256" class="sr-only" aria-labelledby="size-choice-0-label">
+                                                    <p id="size-choice-0-label">256 bits</p>
+                                                </label>
+                                            </div>
+                                        </fieldset>
                                         <p class="text-sm text-red-600 text-left pl-1 errorNBits hidden">Seleccione un tamaño de bits para la Clave</p>
                                     </div>
                                     <div class="col-span-6">
@@ -114,7 +114,7 @@
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </span>
-                                <button class="cleanCriptoBtn inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+                                <button class="cleanCriptoBtn hidden inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
                                     Limpiar
                                     <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -161,36 +161,73 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6 mb-3">
                                     <div class="col-span-6">
+                                        <fieldset x-data="{sized: '128d'}">
+                                            <legend class="block font-medium text-sm text-gray-700">Tamaño de la clave</legend>
+                                            <div class="grid grid-cols-3 gap-3">
+                                                <label for="128d"
+                                                    class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                    :aria-checked="sized == '128d'"
+                                                    :class="sized == '128d' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                    <input x-model="sized" id="128d" type="radio" name="sizeKeyDecifrar" value="128d" checked class="sr-only"
+                                                        aria-labelledby="size-choice-0-label">
+                                                    <p id="size-choice-0-label">128 bits</p>
+                                                </label>
+                                                <label for="192d"
+                                                    class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                    :aria-checked="sized == '192d'"
+                                                    :class="sized == '192d' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                    <input x-model="sized" id="192d" type="radio" name="sizeKeyDecifrar" value="192d" class="sr-only"
+                                                        aria-labelledby="size-choice-0-label">
+                                                    <p id="size-choice-0-label">192 bits</p>
+                                                </label>
+                                                <label for="256d"
+                                                    class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium sm:flex-1 cursor-pointer focus:outline-none checked:bg-indigo-600 checked:border-transparent checked:text-white checked:hover:bg-indigo-700"
+                                                    :aria-checked="sized == '256d'"
+                                                    :class="sized == '256d' ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'">
+                                                    <input x-model="sized" id="256d" type="radio" name="sizeKeyDecifrar" value="256d" class="sr-only"
+                                                        aria-labelledby="size-choice-0-label">
+                                                    <p id="size-choice-0-label">256 bits</p>
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorNBitsDC hidden">Seleccione un tamaño de bits para la Clave</p>
+                                    </div>
+                                    <div class="col-span-6">
                                         <label for="claveDecifrado" class="block font-medium text-sm text-gray-700">Clave</label>
                                         <input id="claveDecifrado" type="text" class="w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                                        <p class="text-sm text-red-600 text-left pl-1 errorClave hidden">message</p>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorPasswordDC hidden">Ingrese la clave con la que se cifro el texto</p>
                                     </div>
                                     <div class="col-span-6">
                                         <label for="textoCifrado" class="block font-medium text-sm text-gray-700">Texto Cifrado</label>
                                         <textarea id="textoCifrado" cols="10" rows=3" maxlength="2000" class="border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" placeholder="Ingrese aquí el texto cifrado"></textarea>
-                                        <p class="text-sm text-red-600 text-left pl-1 errorTexto hidden">message</p>
+                                        <p class="text-sm text-red-600 text-left pl-1 errorPlaintxtDC hidden">Ingrese el texto cifrado</p>
                                     </div>
-                                    <div class="col-span-6 bg-green-100 text-green-500 border-green-300 border-l-4 p-4 rounded-md shadow">
+                                    <div class="respuestaDescripto hidden col-span-6 bg-green-100 text-green-500 border-green-300 border-l-4 p-4 rounded-md shadow">
                                         <p class="font-medium"><strong>Texto Descifrado</strong></p>
                                         <p id="textoDecifrado">Aquí estara el texto decifrado</p>
-                                        <p class="text-left text-xs mt-2"><strong>Tiempo: </strong><span>2.000</span>ms</p>
+                                        <p class="text-left text-xs mt-2"><strong>Tiempo: </strong><span id="tiempoDecifrado">2.000</span></p>
+                                    </div>
+                                    <div class="erroraDescripto hidden col-span-6 bg-rose-100 text-rose-500 border-rose-300 border-l-4 p-4 rounded-md shadow">
+                                        <p class="font-medium"><strong>Error</strong></p>
+                                        <p id="error-decrypt">Aquí estara el error</p>
+                                        <p class="text-left text-xs mt-2"><strong>Tiempo: </strong><span id="error-tiempoDecifrado">2.000</span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="action-buttons flex items-center justify-end px-4 py-3 bg-gray-200 text-right sm:px-6 sm:rounded-b-md">
-                                <span class="mr-3 loader">
+                                <span class="mr-3 loaderDescripto hidden">
                                     <svg class="animate-spin h-6 w-6 text-green-500 opacity-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"> </circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </span>
-                                <button class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+                                <button class="cleanDescifrarBtn hidden inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widesthover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
                                     Limpiar
                                     <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </button>
-                                <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">
+                                <button class="decifrarBtn inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3"">
                                     Desencriptar
                                     <svg class="hidden sm:block w-4 h-4 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
